@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ContentView: View {
+struct MixerView: View {
     @State var redValue: Double = 0
     @State var greenValue: Double = 0
     @State var blueValue: Double = 0
@@ -29,10 +29,11 @@ struct ColorView: View {
     @Binding var red: Double
     @Binding var green: Double
     @Binding var blue: Double
-    @State var hextriplet: String = "#000000"
     var body: some View {
-        Button(action: {}) {
-            Text(hextriplet)
+        Button(action: {
+            UIPasteboard.general.string = "#\(getHexTriplet(red, green, blue))"
+        }) {
+            Text("#\(getHexTriplet(red, green, blue))")
                 .foregroundColor(textColorInvert())
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color.init(red: red, green: green, blue: blue))
