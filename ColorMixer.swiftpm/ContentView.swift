@@ -59,14 +59,21 @@ struct ColorSlider: View {
     @Binding var value: Double
     @State var color: Color
     var body: some View {
-        Slider(value: $value, in: 0...1)
-            .accentColor(.clear)
-            .background(color.opacity(value))
-            .cornerRadius(100)
-            .overlay(
-                RoundedRectangle(cornerRadius: 100)
-                    .stroke(.tertiary, lineWidth: 1.5)
-            )
-            .padding()
+        ZStack {
+            Slider(value: $value, in: 0...1)
+                .accentColor(.clear)
+                .background(
+                    ZStack {
+                        Color.black.opacity(1-value)
+                        color.opacity(value)
+                    }
+                )
+                .cornerRadius(100)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 100)
+                            .stroke(.tertiary, lineWidth: 1.5)
+                )
+                .padding()
+        }
     }
 }
